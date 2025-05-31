@@ -27,29 +27,35 @@ fn window_conf() -> Conf {
 #[macroquad::main(window_conf)]
 async fn main() {
     let lbl_title = Label::new("Tic Tac Toe", 250.0, 75.0, 80);
-    let btn_square1 = TextButton::new(225.0, 150.0, 175.0, 210.0, "", WHITE, GRAY, 30);
-    let btn_square2 = TextButton::new(225.0, 381.0, 175.0, 210.0, "", WHITE, GRAY, 30);
-    let btn_square3 = TextButton::new(225.0, 612.0, 175.0, 210.0, "", WHITE, GRAY, 30);
-    let btn_square4 = TextButton::new(425.0, 150.0, 175.0, 210.0, "", WHITE, GRAY, 30);
-    let btn_square5 = TextButton::new(425.0, 381.0, 175.0, 210.0, "", WHITE, GRAY, 30);
-    let btn_square6 = TextButton::new(425.0, 612.0, 175.0, 210.0, "", WHITE, GRAY, 30);
-    let btn_square7 = TextButton::new(625.0, 150.0, 175.0, 210.0, "", WHITE, GRAY, 30);
-    let btn_square8 = TextButton::new(625.0, 381.0, 175.0, 210.0, "", WHITE, GRAY, 30);
-    let btn_square9 = TextButton::new(625.0, 612.0, 175.0, 210.0, "", WHITE, GRAY, 30);
+    let btn_start = TextButton::new( 25.0, 150.0, 175.0, 100.0, "Start", BLUE, RED, 40);
+     // Create a mutable vector of buttons
+    let mut squares = vec![
+        TextButton::new(225.0, 150.0, 175.0, 210.0, "", WHITE, GRAY, 30),
+        TextButton::new(225.0, 381.0, 175.0, 210.0, "", WHITE, GRAY, 30),
+        TextButton::new(225.0, 612.0, 175.0, 210.0, "", WHITE, GRAY, 30),
+        TextButton::new(425.0, 150.0, 175.0, 210.0, "", WHITE, GRAY, 30),
+        TextButton::new(425.0, 381.0, 175.0, 210.0, "", WHITE, GRAY, 30),
+        TextButton::new(425.0, 612.0, 175.0, 210.0, "", WHITE, GRAY, 30),
+        TextButton::new(625.0, 150.0, 175.0, 210.0, "", WHITE, GRAY, 30),
+        TextButton::new(625.0, 381.0, 175.0, 210.0, "", WHITE, GRAY, 30),
+        TextButton::new(625.0, 612.0, 175.0, 210.0, "", WHITE, GRAY, 30),
+    ];
     loop {
+        // background and assets
         clear_background(WHITE);
         draw_rectangle(0.0, 0.0, 1024.0, 120.0, BLUE);
         draw_grid(25.0, BLACK);
+        // draw buttons and labels
         lbl_title.draw();
-        if btn_square1.click() {}
-        if btn_square2.click() {}
-        if btn_square3.click() {}
-        if btn_square4.click() {}
-        if btn_square5.click() {}
-        if btn_square6.click() {}
-        if btn_square7.click() {}
-        if btn_square8.click() {}
-        if btn_square9.click() {}
+        // Draw each button in the squares vector
+        for btn in squares.iter_mut() {
+            if btn.click() {
+                btn.normal_color = GRAY;
+                btn.set_text("X");
+            }
+        }
+        if btn_start.click() {
+        }
         next_frame().await;
     }
 }
